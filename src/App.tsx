@@ -20,14 +20,37 @@ export default function App() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
 
-  // İletişim Formu Gönderimi (Bir sonraki adımda Formspree ile gerçek maile bağlayacağız)
+  // Gerçek Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
-    setTimeout(() => {
-      setFormStatus('success');
-      setFormData({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
-    }, 800);
+
+    try {
+      const response = await fetch('https://formspree.io/f/xoedjner', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          projectType: formData.projectType,
+          message: formData.message,
+          _to: 'contact@metinyur.dev'
+        })
+      });
+
+      if (response.ok) {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
+      } else {
+        setFormStatus('idle');
+        alert('Mesaj gönderilemedi, lütfen tekrar deneyin.');
+      }
+    } catch (error) {
+      setFormStatus('idle');
+      alert('Bir bağlantı hatası oluştu.');
+    }
   };
 
   const projects = [
