@@ -21,12 +21,18 @@ export const textToSqlProject: ProjectDetail = {
     { url: "/assets/projects/text2sql/text2sql-3.png", caption: "Figure 1.3: Natural language query prompt input interface with active selection." },
     { url: "/assets/projects/text2sql/text2sql-4.png", caption: "Figure 2.1: Generated PostgreSQL query output displaying structured tabular dataset." },
     { url: "/assets/projects/text2sql/text2sql-5.png", caption: "Figure 3.1: Automated Pie Chart visualization rendering query results dynamically." },
-    { url: "/assets/projects/text2sql/text2sql-6.png", caption: "Figure 3.2: Interactive Bar Chart breakdown of monthly metrics for business intelligence." }
+    { url: "/assets/projects/text2sql/text2sql-6.png", caption: "Figure 3.2: Interactive Bar Chart breakdown of monthly metrics for business intelligence." },
+    { url: "/assets/projects/text2sql/text2sql-7.png", caption: "Figure 4.1: Interactive AI Assistant Panel and Quick-Action Natural Language Prompts." }
+
   ],
   architectureDetails: [
     {
       title: "Secure Session & Authentication",
       description: "Protected enterprise endpoint architecture featuring clean login screens, JWT-secured token handling, and user state management."
+    },
+    {
+      title: "Interactive AI Assistant Panel",
+      description: "Features a dedicated chat drawer powered by local LLMs, enabling users to interact via conversational natural language, ask database questions, and utilize quick-action prompt chips."
     },
     {
       title: "Air-Gapped Local LLM Inference",
