@@ -13,16 +13,21 @@ import {
   Sparkles,
   Send,
   MapPin,
-  Award
+  Award,
+  Globe
 } from 'lucide-react';
 import { projectsData } from './data/projectsData';
 import type { ProjectDetail } from './data/projectsData'; 
 import ProjectModal from './components/ProjectModal';
+import { translations, type Language } from './data/translations';
 
 export default function App() {
+  const [lang, setLang] = useState<Language>('en');
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
+
+  const t = translations[lang];
 
   // Gerçek Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
@@ -57,7 +62,6 @@ export default function App() {
     }
   };
 
-  // Şu an verileri hazır olan aktif projelerimiz (Clinical LLM ve Kubernetes dosyaları eklendikçe buraya dahil edilebilir)
   const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
 
   const services = [
@@ -111,18 +115,28 @@ export default function App() {
           </a>
 
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <a href="#projects" className="hover:text-white transition-colors">Case Studies</a>
-            <a href="#services" className="hover:text-white transition-colors">Services</a>
-            <a href="#writing" className="hover:text-white transition-colors">Publications</a>
-            <a href="#stack" className="hover:text-white transition-colors">Tech Stack</a>
+            <a href="#projects" className="hover:text-white transition-colors">{t.nav.caseStudies}</a>
+            <a href="#services" className="hover:text-white transition-colors">{t.nav.services}</a>
+            <a href="#writing" className="hover:text-white transition-colors">{t.nav.publications}</a>
+            <a href="#stack" className="hover:text-white transition-colors">{t.nav.stack}</a>
           </nav>
 
           <div className="flex items-center gap-3">
+            {/* DİL DEĞİŞTİRME BUTONU */}
+            <button
+              onClick={() => setLang(lang === 'en' ? 'tr' : 'en')}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono font-bold rounded-lg bg-zinc-900 border border-zinc-700 text-purple-400 hover:text-white transition-all cursor-pointer shadow-sm"
+              title="Change Language / Dil Değiştir"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              {lang === 'en' ? 'TR' : 'EN'}
+            </button>
+
             <a
               href="#contact"
               className="px-4 py-2 text-sm font-medium rounded-lg bg-purple-600 hover:bg-purple-500 text-white transition-all shadow-lg shadow-purple-500/20"
             >
-              Work With Me
+              {t.nav.workWithMe}
             </a>
           </div>
         </div>
@@ -133,19 +147,19 @@ export default function App() {
         <section className="py-20 md:py-28 border-b border-zinc-800/60">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-medium mb-6">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Available for Global Consulting & Contract Roles (US / EU Timezones)
+            {t.hero.badge}
           </div>
 
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1] max-w-4xl">
-            AI & Full-Stack Engineer building{' '}
+            {t.hero.titlePrefix}{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
-              production RAG, Multi-Agent & Private LLM
+              {t.hero.titleHighlight}
             </span>{' '}
-            systems.
+            {t.hero.titleSuffix}
           </h1>
 
           <p className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed">
-            I help startups and enterprises turn complex data and LLM capabilities into reliable, privacy-first software—from parameter-efficient fine-tuning to scalable FastAPI and .NET Core backends.
+            {t.hero.description}
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -155,14 +169,14 @@ export default function App() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all shadow-lg shadow-purple-600/25"
             >
-              Hire Me on Upwork
+              {t.hero.hireUpwork}
               <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
               href="#projects"
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold transition-all"
             >
-              Explore Case Studies
+              {t.hero.exploreProjects}
             </a>
           </div>
 
@@ -170,22 +184,22 @@ export default function App() {
             <div className="flex items-start gap-3">
               <Award className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-semibold text-white">#1 Top Story on HackerNoon</p>
-                <p className="text-xs text-zinc-400 mt-0.5">Ranked #1 overall & #1 in AI/ML for LLM systems architecture</p>
+                <p className="text-sm font-semibold text-white">{t.hero.hackernoonStat}</p>
+                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.hackernoonDesc}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Cpu className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-semibold text-white">M.Sc. Computer Engineering</p>
-                <p className="text-xs text-zinc-400 mt-0.5">1st Place Merit Scholar • Focus on LLM Reasoning & Agents</p>
+                <p className="text-sm font-semibold text-white">{t.hero.masterStat}</p>
+                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.masterDesc}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <MapPin className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-semibold text-white">Ankara, Türkiye (GMT+3)</p>
-                <p className="text-xs text-zinc-400 mt-0.5">Full overlap with EU business hours & US East Coast mornings</p>
+                <p className="text-sm font-semibold text-white">{t.hero.locationStat}</p>
+                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.locationDesc}</p>
               </div>
             </div>
           </div>
@@ -195,8 +209,8 @@ export default function App() {
         <section id="projects" className="py-20 border-b border-zinc-800/60">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">Selected Engineering Case Studies</h2>
-              <p className="text-zinc-400 mt-2">Real-world systems architected for reliability, privacy, and production scale.</p>
+              <h2 className="text-3xl font-bold tracking-tight text-white">{t.projects.title}</h2>
+              <p className="text-zinc-400 mt-2">{t.projects.subtitle}</p>
             </div>
             <a
               href="https://github.com/metinyurdev"
@@ -204,14 +218,14 @@ export default function App() {
               rel="noreferrer"
               className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300"
             >
-              View all repositories on GitHub <ExternalLink className="w-4 h-4" />
+              {t.projects.viewAllGithub} <ExternalLink className="w-4 h-4" />
             </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projectKeys.map((key) => {
               const project = projectsData[key];
-              if (!project) return null; // Güvenlik kontrolü
+              if (!project) return null;
               return (
                 <div
                   key={key}
@@ -234,10 +248,10 @@ export default function App() {
 
                     <div className="mt-4 space-y-2.5 text-sm">
                       <p className="text-zinc-400">
-                        <strong className="text-zinc-200">Challenge:</strong> {project.problem}
+                        <strong className="text-zinc-200">{t.projects.challenge}</strong> {project.problem}
                       </p>
                       <p className="text-zinc-400">
-                        <strong className="text-zinc-200">Architecture:</strong> {project.solution}
+                        <strong className="text-zinc-200">{t.projects.architecture}</strong> {project.solution}
                       </p>
                     </div>
 
@@ -270,8 +284,8 @@ export default function App() {
         {/* SERVICES */}
         <section id="services" className="py-20 border-b border-zinc-800/60">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-white">How I Can Help Your Team</h2>
-            <p className="text-zinc-400 mt-2">Focused engineering engagements tailored for US & European startups and enterprises.</p>
+            <h2 className="text-3xl font-bold tracking-tight text-white">{t.services.title}</h2>
+            <p className="text-zinc-400 mt-2">{t.services.subtitle}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -299,8 +313,8 @@ export default function App() {
         <section id="writing" className="py-20 border-b border-zinc-800/60">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">Technical Writing & Research</h2>
-              <p className="text-zinc-400 mt-2">Deep dives into LLM systems, fine-tuning, and production AI architecture.</p>
+              <h2 className="text-3xl font-bold tracking-tight text-white">{t.writing.title}</h2>
+              <p className="text-zinc-400 mt-2">{t.writing.subtitle}</p>
             </div>
             <a
               href="https://hackernoon.com/u/metinyurdev"
@@ -308,7 +322,7 @@ export default function App() {
               rel="noreferrer"
               className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300"
             >
-              Read more on HackerNoon <ExternalLink className="w-4 h-4" />
+              {t.writing.readMore} <ExternalLink className="w-4 h-4" />
             </a>
           </div>
 
@@ -316,13 +330,13 @@ export default function App() {
             <div className="space-y-2 max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-semibold text-purple-300 bg-purple-500/15 px-3 py-1 rounded-full">
                 <BookOpen className="w-3.5 h-3.5" />
-                Featured • #1 Top Story on HackerNoon
+                {t.writing.featuredBadge}
               </div>
               <h3 className="text-2xl font-bold text-white">
-                The LLM Operating System: Transformers, Limitations, and the Need for Adaptation
+                {t.writing.articleTitle}
               </h3>
               <p className="text-sm text-zinc-300 leading-relaxed">
-                An architectural analysis of treating Large Language Models as kernel processes within modern software systems—covering context bottlenecks, memory hierarchies, tool orchestration, and domain adaptation.
+                {t.writing.articleDesc}
               </p>
             </div>
             <a
@@ -331,14 +345,14 @@ export default function App() {
               rel="noreferrer"
               className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-sm transition-colors"
             >
-              Read Article <ArrowUpRight className="w-4 h-4" />
+              {t.writing.readArticle} <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
         </section>
 
         {/* TECH STACK */}
         <section id="stack" className="py-20 border-b border-zinc-800/60">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-10">Production Tech Stack</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-white mb-10">{t.stack.title}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {skillGroups.map((group, idx) => (
               <div key={idx} className="rounded-2xl bg-zinc-900/40 border border-zinc-800 p-6">
@@ -365,9 +379,9 @@ export default function App() {
         <section id="contact" className="py-20">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">Let’s Build Your Next AI System</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-white">{t.contact.title}</h2>
               <p className="text-zinc-400 mt-3 leading-relaxed">
-                Have a project in mind or looking for an experienced AI & Full-Stack engineer for your team? Send a direct message or invite me to your job on Upwork.
+                {t.contact.subtitle}
               </p>
 
               <div className="mt-8 space-y-4">
@@ -418,7 +432,7 @@ export default function App() {
 
             <form onSubmit={handleSubmit} className="rounded-2xl bg-zinc-900/50 border border-zinc-800 p-7 space-y-4">
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">Your Name</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.yourName}</label>
                 <input
                   type="text"
                   required
@@ -430,7 +444,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">Work Email</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.workEmail}</label>
                 <input
                   type="email"
                   required
@@ -442,7 +456,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">Project Scope</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.projectScope}</label>
                 <select
                   value={formData.projectType}
                   onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
@@ -456,7 +470,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">Project Details</label>
+                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.projectDetails}</label>
                 <textarea
                   rows={4}
                   required
@@ -472,13 +486,13 @@ export default function App() {
                 disabled={formStatus === 'submitting'}
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all cursor-pointer"
               >
-                {formStatus === 'submitting' ? 'Sending...' : 'Send Inquiry'}
+                {formStatus === 'submitting' ? t.contact.sending : t.contact.sendInquiry}
                 <Send className="w-4 h-4" />
               </button>
 
               {formStatus === 'success' && (
                 <p className="text-xs text-emerald-400 text-center pt-1">
-                  Message received! I will get back to you within 24 hours.
+                  {t.contact.successMsg}
                 </p>
               )}
             </form>
@@ -490,7 +504,7 @@ export default function App() {
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
       <footer className="border-t border-zinc-800/80 py-8 text-center text-xs text-zinc-500">
-        <p>© {new Date().getFullYear()} Metin Yurduseven. Engineered with React, TypeScript & Tailwind CSS.</p>
+        <p>© {new Date().getFullYear()} Metin Yurduseven. {t.footer.rights}</p>
       </footer>
     </div>
   );
