@@ -16,10 +16,10 @@ export const clinicalLlmProject: ProjectDetail = {
   github: "https://huggingface.co/metinyurdev/clinical-asistant-qwen2.5-14b-lora",
   demoLabel: "Explore Hugging Face Model & GGUF",
   images: [
-    { url: "/assets/projects/clinical/clinicalLlm-1.jpg", caption: "Figure 1.1: Clinical reasoning test prompt evaluating acute coronary syndrome (ACS) symptoms and differential diagnosis steps." },
-    { url: "/assets/projects/clinical/clinicalLlm-2.jpg", caption: "Figure 1.2: Diagnostic reasoning breakdown identifying measles (rubeola), Koplik's spots, and immediate isolation protocols." },
-    { url: "/assets/projects/clinical/clinicalLlm-3.jpg", caption: "Figure 2.1: Hugging Face gated repository view for the Ollama-compatible Q4_K_M GGUF quantized model artifact." },
-    { url: "/assets/projects/clinical/clinicalLlm-4.jpg", caption: "Figure 2.2: Hugging Face repository view for the primary PEFT (LoRA) training adapters and academic research documentation." }
+    { url: "/assets/projects/clinical/clinicalLlm-1.png", caption: "Figure 1.1: Clinical reasoning test prompt evaluating acute coronary syndrome (ACS) symptoms and differential diagnosis steps." },
+    { url: "/assets/projects/clinical/clinicalLlm-2.png", caption: "Figure 1.2: Diagnostic reasoning breakdown identifying measles (rubeola), Koplik's spots, and immediate isolation protocols." },
+    { url: "/assets/projects/clinical/clinicalLlm-3.png", caption: "Figure 2.1: Hugging Face gated repository view for the Ollama-compatible Q4_K_M GGUF quantized model artifact." },
+    { url: "/assets/projects/clinical/clinicalLlm-4.png", caption: "Figure 2.2: Hugging Face repository view for the primary PEFT (LoRA) training adapters and academic research documentation." }
   ],
   architectureDetails: [
     {
