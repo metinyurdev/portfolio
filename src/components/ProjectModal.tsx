@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { X, ExternalLink, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import type { ProjectDetail } from '../data/projectsData'; 
 
