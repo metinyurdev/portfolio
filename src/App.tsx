@@ -15,10 +15,14 @@ import {
   MapPin,
   Award
 } from 'lucide-react';
+import { projectsData } from './data/projectsData';
+import type { ProjectDetail } from './data/projectsData'; 
+import ProjectModal from './components/ProjectModal';
 
 export default function App() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
+  const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
 
   // Gerçek Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,48 +57,7 @@ export default function App() {
     }
   };
 
-  const projects = [
-    {
-      title: 'NEXUS — Enterprise Compliance Agent',
-      category: 'Multi-Agent AI & RAG Architecture',
-      problem: 'Manual regulatory auditing across thousands of corporate policy documents is slow, error-prone, and lacks traceability.',
-      solution: 'Engineered a multi-agent corporate compliance auditing platform featuring hybrid vector search, deterministic guardrails, and full LLM observability.',
-      metrics: ['Sub-2s Retrieval Latency', 'End-to-End Traceability via Langfuse', '100% Containerized Deployment'],
-      stack: ['GPT-4o', 'LlamaIndex', 'Qdrant', 'FastAPI', 'React 18', 'Langfuse', 'Docker Compose'],
-      github: 'https://github.com/metinyurdev/nexus-compliance-agent',
-      demoLabel: 'Architecture & Code'
-    },
-    {
-      title: 'Clinical Reasoning LLM (Qwen2.5-14B)',
-      category: 'Parameter-Efficient Fine-Tuning (PEFT)',
-      problem: 'General-purpose open-source LLMs struggle with structured multi-step clinical diagnostic reasoning and medical precision.',
-      solution: 'Executed multi-stage fine-tuning using QLoRA and Unsloth on curated diagnostic datasets, compiling quantized GGUF weights for local clinical inference.',
-      metrics: ['14B Parameter Domain Adaptation', 'Published LoRA & GGUF Weights', 'Local Offline Inference Ready'],
-      stack: ['PyTorch', 'Hugging Face', 'PEFT / QLoRA', 'Unsloth', 'GGUF', 'Ollama'],
-      github: 'https://huggingface.co/metinyurdev',
-      demoLabel: 'Hugging Face Models'
-    },
-    {
-      title: 'Privacy-First Local Text-to-SQL Platform',
-      category: 'On-Premise Enterprise AI',
-      problem: 'Enterprises cannot send sensitive relational database schemas and financial records to third-party cloud LLM APIs.',
-      solution: 'Built a self-hosted natural language to SQL analytics engine running completely air-gapped on local infrastructure with schema-aware prompt injection protection.',
-      metrics: ['Zero External Data Leakage', 'Automated SQL Validation', 'Real-Time Query Execution'],
-      stack: ['Python', 'FastAPI', 'Ollama', 'PostgreSQL', 'React', 'Vite', 'Docker'],
-      github: 'https://github.com/metinyurdev',
-      demoLabel: 'View Repository'
-    },
-    {
-      title: 'Cloud-Native FastAPI Microservice',
-      category: 'Kubernetes & Backend Infrastructure',
-      problem: 'Deploying scalable Python API services requires robust container orchestration, environment control, and traffic routing.',
-      solution: 'Developed and containerized a FastAPI microservice, deployed on Minikube Kubernetes cluster featuring custom Ingress routing and automated health probes.',
-      metrics: ['Kubernetes Minikube Deployment', 'Ingress Traffic Routing', 'Production-Ready Health Probes'],
-      stack: ['Python', 'FastAPI', 'Docker', 'Kubernetes (Minikube)', 'YAML', 'DevOps'],
-      github: 'https://github.com/metinyurdev',
-      demoLabel: 'View Architecture'
-    }
-  ];
+  const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
 
   const services = [
     {
@@ -245,61 +208,60 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((project, idx) => (
-              <div
-                key={idx}
-                className="group rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-purple-500/50 p-7 flex flex-col justify-between transition-all"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-md">
-                      {project.category}
-                    </span>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-zinc-400 hover:text-white inline-flex items-center gap-1 text-xs font-medium"
-                    >
-                      {project.demoLabel} <ArrowUpRight className="w-3.5 h-3.5" />
-                    </a>
+            {projectKeys.map((key) => {
+              const project = projectsData[key];
+              return (
+                <div
+                  key={key}
+                  onClick={() => setSelectedProject(project)}
+                  className="group rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-purple-500/50 p-7 flex flex-col justify-between transition-all cursor-pointer"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 mb-3">
+                      <span className="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-md">
+                        {project.category}
+                      </span>
+                      <span className="text-purple-400 group-hover:text-purple-300 inline-flex items-center gap-1 text-xs font-medium">
+                        {project.demoLabel} <ArrowUpRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                      {project.title}
+                    </h3>
+
+                    <div className="mt-4 space-y-2.5 text-sm">
+                      <p className="text-zinc-400">
+                        <strong className="text-zinc-200">Challenge:</strong> {project.problem}
+                      </p>
+                      <p className="text-zinc-400">
+                        <strong className="text-zinc-200">Architecture:</strong> {project.solution}
+                      </p>
+                    </div>
+
+                    <div className="mt-5 space-y-1.5">
+                      {project.metrics.map((metric, mIdx) => (
+                        <div key={mIdx} className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                          <span>{metric}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
-                    {project.title}
-                  </h3>
-
-                  <div className="mt-4 space-y-2.5 text-sm">
-                    <p className="text-zinc-400">
-                      <strong className="text-zinc-200">Challenge:</strong> {project.problem}
-                    </p>
-                    <p className="text-zinc-400">
-                      <strong className="text-zinc-200">Architecture:</strong> {project.solution}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 space-y-1.5">
-                    {project.metrics.map((metric, mIdx) => (
-                      <div key={mIdx} className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
-                        <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                        <span>{metric}</span>
-                      </div>
+                  <div className="mt-6 pt-5 border-t border-zinc-800/80 flex flex-wrap gap-2">
+                    {project.stack.map((tech, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="text-xs font-mono px-2.5 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-300"
+                      >
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </div>
-
-                <div className="mt-6 pt-5 border-t border-zinc-800/80 flex flex-wrap gap-2">
-                  {project.stack.map((tech, tIdx) => (
-                    <span
-                      key={tIdx}
-                      className="text-xs font-mono px-2.5 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -521,6 +483,9 @@ export default function App() {
           </div>
         </section>
       </main>
+
+      {/* PROJE DETAY MODALI */}
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
       <footer className="border-t border-zinc-800/80 py-8 text-center text-xs text-zinc-500">
         <p>© {new Date().getFullYear()} Metin Yurduseven. Engineered with React, TypeScript & Tailwind CSS.</p>
