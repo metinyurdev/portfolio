@@ -32,6 +32,23 @@ export const translations = {
     services: {
       title: "How I Can Help Your Team",
       subtitle: "Focused engineering engagements tailored for US & European startups and enterprises.",
+      list: [
+        {
+          title: "Custom AI Agents & Production RAG",
+          description: "End-to-end development of multi-agent workflows and Retrieval-Augmented Generation pipelines connected to your proprietary documents, APIs, and databases.",
+          deliverables: ["Vector DB setup (Qdrant/FAISS)", "Hallucination guardrails & evals", "FastAPI microservice integration"]
+        },
+        {
+          title: "Private / Local LLM Deployment & Fine-Tuning",
+          description: "Deploy open-weights models (Llama, Qwen, Mistral) inside your private VPC or on-premise servers with zero data leaving your infrastructure.",
+          deliverables: ["QLoRA / PEFT domain fine-tuning", "GGUF quantization & Ollama/vLLM setup", "GDPR / HIPAA-friendly air-gapped AI"]
+        },
+        {
+          title: "Full-Stack AI MVP & Backend Systems",
+          description: "Rapid, production-grade web applications and scalable backend APIs built with clean architecture for startups and enterprise teams.",
+          deliverables: ["Python (FastAPI/Django) or .NET Core", "Modern React / TypeScript frontends", "Dockerized CI/CD deployment"]
+        }
+      ]
     },
     writing: {
       title: "Technical Writing & Research",
@@ -93,6 +110,23 @@ export const translations = {
     services: {
       title: "Ekibinize Nasıl Yardımcı Olabilirim?",
       subtitle: "ABD ve Avrupa'daki girişimler ile kurumsal ekipler için odaklı mühendislik çözümleri.",
+      list: [
+        {
+          title: "Özel AI Ajanları & Üretim RAG Sistemleri",
+          description: "Şirket içi belgelerinize, API'lerinize ve veritabanlarınıza bağlanarak çalışan çok ajanlı iş akışları ve Retrieval-Augmented Generation (RAG) boru hatlarının uçtan uca geliştirilmesi.",
+          deliverables: ["Vektör Veritabanı Kurulumu (Qdrant/FAISS)", "Halüsinasyon Kalkanları & Değerlendirme (Evals)", "FastAPI mikroservis entegrasyonu"]
+        },
+        {
+          title: "Özel / Yerel LLM Dağıtımı ve İnce Ayar (Fine-Tuning)",
+          description: "Açık ağırlıklı modelleri (Llama, Qwen, Mistral) özel VPC'nizde veya sunucularınızda, altyapınızdan hiçbir veri dışarı çıkmayacak şekilde air-gapped olarak çalıştırın.",
+          deliverables: ["QLoRA / PEFT domain ince ayarı", "GGUF kuantizasyonu & Ollama/vLLM kurulumu", "GDPR / HIPAA uyumlu kapalı devre AI"]
+        },
+        {
+          title: "Full-Stack AI MVP & Backend Sistemleri",
+          description: "Girişimler ve kurumsal ekipler için temiz mimariyle (Clean Architecture) inşa edilmiş, üretime hazır web uygulamaları ve ölçeklenebilir backend API'leri.",
+          deliverables: ["Python (FastAPI/Django) veya .NET Core", "Modern React / TypeScript arayüzleri", "Dockerize edilmiş CI/CD dağıtımı"]
+        }
+      ]
     },
     writing: {
       title: "Teknik Makaleler ve Araştırmalar",
@@ -110,7 +144,7 @@ export const translations = {
       title: "Yeni Yapay Zeka Sisteminizi Birlikte İnşa Edelim",
       subtitle: "Aklınızda bir proje mi var ya da ekibiniz için deneyimli bir Yapay Zeka & Full-Stack mühendis mi arıyorsunuz? Doğrudan mesaj gönderin veya Upwork üzerinden davet edin.",
       yourName: "Adınız Soyadınız",
-      workEmail: "İş E-postanız",
+      workEmail: "E-postanız",
       projectScope: "Proje Kapsamı",
       projectDetails: "Proje Detayları",
       sendInquiry: "Mesajı Gönder",

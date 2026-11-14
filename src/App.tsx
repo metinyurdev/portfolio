@@ -64,25 +64,11 @@ export default function App() {
 
   const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
 
-  const services = [
-    {
-      icon: <Sparkles className="w-6 h-6 text-purple-400" />,
-      title: 'Custom AI Agents & Production RAG',
-      description: 'End-to-end development of multi-agent workflows and Retrieval-Augmented Generation pipelines connected to your proprietary documents, APIs, and databases.',
-      deliverables: ['Vector DB setup (Qdrant/FAISS)', 'Hallucination guardrails & evals', 'FastAPI microservice integration']
-    },
-    {
-      icon: <ShieldCheck className="w-6 h-6 text-purple-400" />,
-      title: 'Private / Local LLM Deployment & Fine-Tuning',
-      description: 'Deploy open-weights models (Llama, Qwen, Mistral) inside your private VPC or on-premise servers with zero data leaving your infrastructure.',
-      deliverables: ['QLoRA / PEFT domain fine-tuning', 'GGUF quantization & Ollama/vLLM setup', 'GDPR / HIPAA-friendly air-gapped AI']
-    },
-    {
-      icon: <Layers className="w-6 h-6 text-purple-400" />,
-      title: 'Full-Stack AI MVP & Backend Systems',
-      description: 'Rapid, production-grade web applications and scalable backend APIs built with clean architecture for startups and enterprise teams.',
-      deliverables: ['Python (FastAPI/Django) or .NET Core', 'Modern React / TypeScript frontends', 'Dockerized CI/CD deployment']
-    }
+  // İkonları sabit tutup metinleri dile göre t.services.list'ten alıyoruz
+  const serviceIcons = [
+    <Sparkles className="w-6 h-6 text-purple-400" />,
+    <ShieldCheck className="w-6 h-6 text-purple-400" />,
+    <Layers className="w-6 h-6 text-purple-400" />
   ];
 
   const skillGroups = [
@@ -289,10 +275,10 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {services.map((service, idx) => (
+            {t.services.list.map((service, idx) => (
               <div key={idx} className="rounded-2xl bg-zinc-900/40 border border-zinc-800 p-7">
                 <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-5">
-                  {service.icon}
+                  {serviceIcons[idx]}
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2.5">{service.title}</h3>
                 <p className="text-sm text-zinc-400 leading-relaxed mb-5">{service.description}</p>
