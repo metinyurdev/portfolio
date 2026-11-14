@@ -8,3 +8,9 @@ export const projectsData: Record<string, ProjectDetail> = {
   nexus: nexusProject,
   "text-to-sql": textToSqlProject,
 };
+
+// Eğer UI bileşeni projeleri dizi (array) olarak alıyorsa burayı kullanır:
+export const projectsList: ProjectDetail[] = [
+  nexusProject,
+  textToSqlProject,
+];

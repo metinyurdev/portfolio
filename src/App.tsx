@@ -57,7 +57,8 @@ export default function App() {
     }
   };
 
-  const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
+  // Şu an verileri hazır olan aktif projelerimiz (Clinical LLM ve Kubernetes dosyaları eklendikçe buraya dahil edilebilir)
+  const projectKeys = ['nexus', 'text-to-sql'];
 
   const services = [
     {
@@ -210,6 +211,7 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projectKeys.map((key) => {
               const project = projectsData[key];
+              if (!project) return null; // Güvenlik kontrolü
               return (
                 <div
                   key={key}
@@ -240,7 +242,7 @@ export default function App() {
                     </div>
 
                     <div className="mt-5 space-y-1.5">
-                      {project.metrics.map((metric, mIdx) => (
+                      {project.metrics?.map((metric, mIdx) => (
                         <div key={mIdx} className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
                           <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                           <span>{metric}</span>
@@ -250,7 +252,7 @@ export default function App() {
                   </div>
 
                   <div className="mt-6 pt-5 border-t border-zinc-800/80 flex flex-wrap gap-2">
-                    {project.stack.map((tech, tIdx) => (
+                    {project.stack?.map((tech, tIdx) => (
                       <span
                         key={tIdx}
                         className="text-xs font-mono px-2.5 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-300"
