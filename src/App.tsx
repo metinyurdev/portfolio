@@ -58,7 +58,7 @@ export default function App() {
   };
 
   // Şu an verileri hazır olan aktif projelerimiz (Clinical LLM ve Kubernetes dosyaları eklendikçe buraya dahil edilebilir)
-  const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql'];
+  const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
 
   const services = [
     {
