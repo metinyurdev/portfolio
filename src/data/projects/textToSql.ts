@@ -18,10 +18,10 @@ export const textToSqlProject: ProjectDetail = {
   images: [
     { url: "/assets/projects/text2sql/text2sql-1.png", caption: "Figure 1.1: Secure authentication login interface guarding enterprise database analytics." },
     { url: "/assets/projects/text2sql/text2sql-2.png", caption: "Figure 1.2: Main analytics dashboard featuring pre-built natural language query suggestion chips and prompt editor." },
-    { url: "/assets/projects/text2sql/text2sql-3.jpg", caption: "Figure 1.3: Natural language query execution interface with selected prompt input." },
-    { url: "/assets/projects/text2sql/text2sql-4.jpg", caption: "Figure 2.1: Generated PostgreSQL query output displaying structured tabular dataset." },
-    { url: "/assets/projects/text2sql/text2sql-5.jpg", caption: "Figure 3.1: Automated Pie Chart visualization rendering query results dynamically." },
-    { url: "/assets/projects/text2sql/text2sql-6.jpg", caption: "Figure 3.2: Interactive Bar Chart breakdown of monthly metrics for business intelligence." }
+    { url: "/assets/projects/text2sql/text2sql-3.png", caption: "Figure 1.3: Natural language query prompt input interface with active selection." },
+    { url: "/assets/projects/text2sql/text2sql-4.png", caption: "Figure 2.1: Generated PostgreSQL query output displaying structured tabular dataset." },
+    { url: "/assets/projects/text2sql/text2sql-5.png", caption: "Figure 3.1: Automated Pie Chart visualization rendering query results dynamically." },
+    { url: "/assets/projects/text2sql/text2sql-6.png", caption: "Figure 3.2: Interactive Bar Chart breakdown of monthly metrics for business intelligence." }
   ],
   architectureDetails: [
     {
