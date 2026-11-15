@@ -32,7 +32,7 @@ export default function Home({ lang, onNavigate }: HomeProps) {
             />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-white tracking-tight">Metin Yurduseven</h2>
+            <h2 className="text-2xl font-bold text-white tracking-tight">Metin YURDUSEVEN</h2>
             <p className="text-xs font-mono text-purple-400 mt-0.5">AI & Software Engineer • M.Sc. Computer Engineering Student</p>
           </div>
         </div>

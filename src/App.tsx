@@ -23,6 +23,12 @@ export default function App() {
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
 
+  // Sayfa değiştirirken otomatik olarak en üste kaydırma fonksiyonu
+  const handleViewChange = (view: ViewState) => {
+    setCurrentView(view);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,13 +67,13 @@ export default function App() {
         lang={lang} 
         setLang={setLang} 
         currentView={currentView} 
-        setCurrentView={setCurrentView} 
+        setCurrentView={handleViewChange} 
       />
 
       <main className="max-w-6xl mx-auto px-6 w-full py-12 flex-grow">
         {currentView !== 'home' && (
           <button
-            onClick={() => setCurrentView('home')}
+            onClick={() => handleViewChange('home')}
             className="inline-flex items-center gap-2 mb-8 text-xs font-mono text-zinc-400 hover:text-white bg-zinc-900/60 border border-zinc-800 px-3.5 py-2 rounded-lg transition-all cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4 text-purple-400" />
@@ -76,7 +82,7 @@ export default function App() {
         )}
 
         {/* SAYFA RENDERER */}
-        {currentView === 'home' && <Home lang={lang} onNavigate={setCurrentView} />}
+        {currentView === 'home' && <Home lang={lang} onNavigate={handleViewChange} />}
         {currentView === 'projects' && <Projects lang={lang} onSelectProject={setSelectedProject} />}
         {currentView === 'services' && <Services lang={lang} />}
         {currentView === 'writing' && <Writing lang={lang} />}
@@ -96,7 +102,7 @@ export default function App() {
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
       {/* Kurumsal Footer Bileşeni */}
-      <Footer lang={lang} onNavigate={setCurrentView} />
+      <Footer lang={lang} onNavigate={handleViewChange} />
     </div>
   );
 }
