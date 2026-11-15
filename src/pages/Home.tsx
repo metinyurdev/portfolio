@@ -11,15 +11,15 @@ export default function Home({ lang, onNavigate }: HomeProps) {
   const t = translations[lang];
 
   return (
-    <div className="space-y-20 pb-12">
-      {/* 1. HERO SECTION (Üst Kısım: Profil Foto, Başlık ve Açıklamalar) */}
-      <section className="py-8 md:py-12 max-w-4xl mx-auto text-center space-y-8">
+    <div className="space-y-16 pb-12">
+      {/* 1. HERO SECTION (Üst Kısım) */}
+      <section className="py-6 md:py-12 max-w-4xl mx-auto text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           {t.hero.badge}
         </div>
 
-        {/* Profil Fotoğrafı (Merkezde Büyük ve Şık) */}
+        {/* Profil Fotoğrafı */}
         <div className="flex flex-col items-center justify-center space-y-3">
           <div className="relative w-24 h-24 rounded-3xl overflow-hidden border-2 border-purple-500/50 shadow-2xl shadow-purple-950/80 bg-zinc-900">
             <img
@@ -37,7 +37,7 @@ export default function Home({ lang, onNavigate }: HomeProps) {
           </div>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+        <h1 className="text-3xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
           {t.hero.titlePrefix}{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
             {t.hero.titleHighlight}
@@ -45,7 +45,7 @@ export default function Home({ lang, onNavigate }: HomeProps) {
           {t.hero.titleSuffix}
         </h1>
 
-        <p className="text-base md:text-lg text-zinc-300 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-sm md:text-lg text-zinc-300 leading-relaxed max-w-2xl mx-auto">
           {t.hero.description}
         </p>
 
@@ -68,30 +68,30 @@ export default function Home({ lang, onNavigate }: HomeProps) {
         </div>
       </section>
 
-      {/* 2. ALTAKİ BÜYÜK VE GÖRKEMLİ AI AGENTIC MİMARİ VİTRİNİ */}
-      <section className="max-w-5xl mx-auto">
+      {/* 2. AI MİMARİ VİTRİNİ (Yazı Resmin Üstünden Kaldırıldı, Altına Alındı) */}
+      <section className="max-w-5xl mx-auto space-y-3">
         <div className="relative rounded-3xl overflow-hidden border border-purple-500/40 bg-zinc-900/90 shadow-2xl shadow-purple-950/70 group">
-          <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent opacity-30 z-10 pointer-events-none" />
           <img
             src="/assets/images/hero-ai-abstract.png"
             alt="AI Agentic Architecture Pipeline"
-            className="w-full h-auto object-cover transform group-hover:scale-102 transition-transform duration-700 max-h-[550px]"
+            className="w-full h-auto object-cover max-h-[500px]"
           />
-          <div className="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-20 bg-zinc-950/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-zinc-800 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-purple-400" />
-              <div>
-                <p className="text-sm font-semibold text-white">Enterprise Agentic RAG & Multi-Stage Fine-Tuning Pipeline</p>
-                <p className="text-xs text-zinc-400">Production-ready architecture designed for zero hallucination & strict data privacy.</p>
-              </div>
+        </div>
+        {/* Açıklama Kartı Resmin Altında (Mobilde Üstüne Binme Sorunu Çözüldü) */}
+        <div className="bg-zinc-900/90 backdrop-blur-md px-6 py-4 rounded-2xl border border-zinc-800 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Sparkles className="w-5 h-5 text-purple-400 shrink-0" />
+            <div>
+              <p className="text-xs md:text-sm font-semibold text-white">Enterprise Agentic RAG & Multi-Stage Fine-Tuning Pipeline</p>
+              <p className="text-[11px] md:text-xs text-zinc-400">Production-ready architecture designed for zero hallucination & strict data privacy.</p>
             </div>
-            <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping shrink-0" />
           </div>
+          <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping shrink-0 ml-2" />
         </div>
       </section>
 
       {/* 3. STATS & HIGHLIGHTS BAR */}
-      <section className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <section className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="flex items-start gap-3 p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/80">
           <Award className="w-6 h-6 text-purple-400 shrink-0 mt-0.5" />
           <div>
@@ -116,19 +116,19 @@ export default function Home({ lang, onNavigate }: HomeProps) {
       </section>
 
       {/* 4. DETAYLI HAKKIMDA & AKADEMİK / PROFESYONEL ARKA PLAN */}
-      <section className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-purple-950/20 via-zinc-900/40 to-zinc-900/50 border border-purple-500/20 p-8 md:p-12 space-y-6">
+      <section className="max-w-5xl mx-auto rounded-3xl bg-gradient-to-br from-purple-950/20 via-zinc-900/40 to-zinc-900/50 border border-purple-500/20 p-6 md:p-12 space-y-6">
         <div className="space-y-3">
           <span className="text-xs font-mono uppercase tracking-widest text-purple-400 bg-purple-500/10 px-3.5 py-1.5 rounded-md">
             {lang === 'tr' ? 'Arka Plan & Vizyon' : 'Background & Vision'}
           </span>
-          <h2 className="text-2xl md:text-3xl font-bold text-white">
+          <h2 className="text-xl md:text-3xl font-bold text-white">
             {lang === 'tr' 
               ? 'Yapay Zeka Araştırmaları ve Üretim Düzeyinde Yazılım Mühendisliği' 
               : 'AI Research & Production-Grade Software Engineering'}
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm md:text-base text-zinc-300 leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm md:text-base text-zinc-300 leading-relaxed">
           <div className="space-y-4">
             <p>
               {lang === 'tr'
@@ -163,25 +163,34 @@ export default function Home({ lang, onNavigate }: HomeProps) {
         </div>
       </section>
 
-      {/* 5. QUICK NAVIGATION CARDS */}
-      <section className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div onClick={() => onNavigate('projects')} className="p-7 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-purple-500/50 cursor-pointer transition-all group">
-          <h3 className="text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
+      {/* 5. QUICK NAVIGATION CARDS (Mobilde Kesin Tıklanabilir Yapıldı) */}
+      <section className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div 
+          onClick={() => onNavigate('projects')} 
+          className="relative z-20 p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 active:scale-98 cursor-pointer transition-all group"
+        >
+          <h3 className="text-base md:text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
             {t.nav.caseStudies} <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-purple-400" />
           </h3>
-          <p className="text-xs text-zinc-400 mt-2.5 leading-relaxed">NEXUS, Clinical LLM, Text-to-SQL & Kubernetes microservices.</p>
+          <p className="text-xs text-zinc-400 mt-2 leading-relaxed">NEXUS, Clinical LLM, Text-to-SQL & Kubernetes microservices.</p>
         </div>
-        <div onClick={() => onNavigate('services')} className="p-7 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-purple-500/50 cursor-pointer transition-all group">
-          <h3 className="text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
+        <div 
+          onClick={() => onNavigate('services')} 
+          className="relative z-20 p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 active:scale-98 cursor-pointer transition-all group"
+        >
+          <h3 className="text-base md:text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
             {t.nav.services} <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-purple-400" />
           </h3>
-          <p className="text-xs text-zinc-400 mt-2.5 leading-relaxed">Custom AI Agents, RAG pipelines & private LLM fine-tuning.</p>
+          <p className="text-xs text-zinc-400 mt-2 leading-relaxed">Custom AI Agents, RAG pipelines & private LLM fine-tuning.</p>
         </div>
-        <div onClick={() => onNavigate('writing')} className="p-7 rounded-2xl bg-zinc-900/40 border border-zinc-800 hover:border-purple-500/50 cursor-pointer transition-all group">
-          <h3 className="text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
+        <div 
+          onClick={() => onNavigate('writing')} 
+          className="relative z-20 p-6 rounded-2xl bg-zinc-900/60 border border-zinc-800 hover:border-purple-500/50 active:scale-98 cursor-pointer transition-all group"
+        >
+          <h3 className="text-base md:text-lg font-bold text-white group-hover:text-purple-400 flex items-center justify-between">
             {t.nav.publications} <ArrowUpRight className="w-4 h-4 text-zinc-500 group-hover:text-purple-400" />
           </h3>
-          <p className="text-xs text-zinc-400 mt-2.5 leading-relaxed">HackerNoon #1 Top Stories & System Architecture research.</p>
+          <p className="text-xs text-zinc-400 mt-2 leading-relaxed">HackerNoon #1 Top Stories & System Architecture research.</p>
         </div>
       </section>
     </div>
