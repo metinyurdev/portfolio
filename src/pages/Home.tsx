@@ -1,4 +1,4 @@
-import { Award, Cpu, MapPin, ArrowUpRight, CheckCircle2, BookOpen, Terminal, Sparkles, Layers } from 'lucide-react';
+import { Award, Cpu, MapPin, ArrowUpRight, CheckCircle2, BookOpen, Terminal, Sparkles } from 'lucide-react';
 import type { Language } from '../data/translations';
 import { translations } from '../data/translations';
 
@@ -27,7 +27,6 @@ export default function Home({ lang, onNavigate }: HomeProps) {
               alt="Metin Yurduseven"
               className="w-full h-full object-cover"
               onError={(e) => {
-                // Eğer .png yüklenemezse .jpg dener veya gizler
                 (e.currentTarget as HTMLElement).style.display = 'none';
               }}
             />
@@ -147,7 +146,7 @@ export default function Home({ lang, onNavigate }: HomeProps) {
             <p>
               {lang === 'tr'
                 ? 'Teknik birikimimi sadece kod yazmakla sınırlı tutmayıp, HackerNoon platformunda yayınladığım "The LLM Operating System: Transformers, Limitations, and the Need for Adaptation" gibi makalelerimle küresel ölçekte #1 Top Story sıralamalarına ulaştım ve binlerce yazılımcıya rehberlik ettim.'
-                : 'Beyond writing production code, I share my technical insights globally. My publication titled "The LLM Operating System: Transformers, Limitations, and the Need for Adaptation" reached the #1 Top Story ranking platform-wide on HackerNoon[cite: 3].'}
+                : 'Beyond writing production code, I share my technical insights globally. My publication titled "The LLM Operating System: Transformers, Limitations, and the Need for Adaptation" reached the #1 Top Story ranking platform-wide on HackerNoon.'}
             </p>
             <div className="pt-2 flex flex-wrap gap-2.5">
               <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20">

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import type { ProjectDetail } from './data/projectsData'; 
 import ProjectModal from './components/ProjectModal';
-import { translations, type Language } from './data/translations';
+import { type Language } from './data/translations';
 
 // Bileşenler ve Sayfalar
 import Navbar from './components/Navbar';
