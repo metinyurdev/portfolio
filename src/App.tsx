@@ -1,35 +1,29 @@
 import React, { useState } from 'react';
-import {
-  Terminal,
-  Cpu,
-  Code2,
-  ExternalLink,
-  BookOpen,
-  Mail,
-  CheckCircle2,
-  ArrowUpRight,
-  Layers,
-  ShieldCheck,
-  Sparkles,
-  Send,
-  MapPin,
-  Award,
-  Globe
-} from 'lucide-react';
-import { projectsData } from './data/projectsData';
+import { ArrowLeft } from 'lucide-react';
 import type { ProjectDetail } from './data/projectsData'; 
 import ProjectModal from './components/ProjectModal';
 import { translations, type Language } from './data/translations';
 
+// Bileşenler ve Sayfalar
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import Services from './pages/Services';
+import Writing from './pages/Writing';
+import Stack from './pages/Stack';
+import Contact from './pages/Contact';
+
+type ViewState = 'home' | 'projects' | 'services' | 'writing' | 'stack' | 'contact';
+
 export default function App() {
   const [lang, setLang] = useState<Language>('en');
+  const [currentView, setCurrentView] = useState<ViewState>('home');
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
 
-  const t = translations[lang];
-
-  // Gerçek Formspree Entegrasyonu
+  // Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
@@ -37,9 +31,7 @@ export default function App() {
     try {
       const response = await fetch('https://formspree.io/f/xoedjner', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
@@ -62,436 +54,49 @@ export default function App() {
     }
   };
 
-  const projectKeys = ['nexus', 'clinical-llm', 'text-to-sql', 'kubernetes'];
-
-  // İkonları sabit tutup metinleri dile göre t.services.list'ten alıyoruz
-  const serviceIcons = [
-    <Sparkles className="w-6 h-6 text-purple-400" />,
-    <ShieldCheck className="w-6 h-6 text-purple-400" />,
-    <Layers className="w-6 h-6 text-purple-400" />
-  ];
-
-  const skillGroups = [
-    {
-      title: 'AI, LLMs & Agents',
-      skills: ['PyTorch', 'Hugging Face', 'LlamaIndex', 'LangChain', 'Dify', 'PEFT / QLoRA', 'Unsloth', 'Ollama', 'Qdrant', 'FAISS', 'Langfuse']
-    },
-    {
-      title: 'Backend & Databases',
-      skills: ['Python', 'FastAPI', 'Django', 'C# / .NET Core', 'EF Core', 'Node.js', 'PostgreSQL', 'SQL Server', 'MySQL', 'REST APIs']
-    },
-    {
-      title: 'Frontend & UI',
-      skills: ['React 18', 'TypeScript', 'Angular', 'Next.js', 'Tailwind CSS', 'Vite', 'Streamlit']
-    },
-    {
-      title: 'DevOps & Infrastructure',
-      skills: ['Docker', 'Docker Compose', 'Kubernetes', 'Linux Admin', 'Git / GitHub Actions', 'VMware ESXi', 'Nginx']
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-sans selection:bg-purple-500/30 selection:text-purple-200">
-      {/* Üst Navigasyon */}
-      <header className="sticky top-0 z-50 backdrop-blur-md bg-[#09090b]/80 border-b border-zinc-800/80">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2 font-mono text-lg font-bold tracking-tight text-white">
-            <Terminal className="w-5 h-5 text-purple-500" />
-            <span>metin<span className="text-purple-500">.dev</span></span>
-          </a>
+    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-sans selection:bg-purple-500/30 selection:text-purple-200 flex flex-col justify-between">
+      {/* Üst Navigasyon (Navbar Bileşeni) */}
+      <Navbar 
+        lang={lang} 
+        setLang={setLang} 
+        currentView={currentView} 
+        setCurrentView={setCurrentView} 
+      />
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-            <a href="#projects" className="hover:text-white transition-colors">{t.nav.caseStudies}</a>
-            <a href="#services" className="hover:text-white transition-colors">{t.nav.services}</a>
-            <a href="#writing" className="hover:text-white transition-colors">{t.nav.publications}</a>
-            <a href="#stack" className="hover:text-white transition-colors">{t.nav.stack}</a>
-          </nav>
+      <main className="max-w-6xl mx-auto px-6 w-full py-12 flex-grow">
+        {currentView !== 'home' && (
+          <button
+            onClick={() => setCurrentView('home')}
+            className="inline-flex items-center gap-2 mb-8 text-xs font-mono text-zinc-400 hover:text-white bg-zinc-900/60 border border-zinc-800 px-3.5 py-2 rounded-lg transition-all cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 text-purple-400" />
+            {lang === 'tr' ? '← Ana Sayfaya Dön' : '← Back to Overview'}
+          </button>
+        )}
 
-          <div className="flex items-center gap-3">
-            {/* DİL DEĞİŞTİRME BUTONU */}
-            <button
-              onClick={() => setLang(lang === 'en' ? 'tr' : 'en')}
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-mono font-bold rounded-lg bg-zinc-900 border border-zinc-700 text-purple-400 hover:text-white transition-all cursor-pointer shadow-sm"
-              title="Change Language / Dil Değiştir"
-            >
-              <Globe className="w-3.5 h-3.5" />
-              {lang === 'en' ? 'TR' : 'EN'}
-            </button>
-
-            <a
-              href="#contact"
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-purple-600 hover:bg-purple-500 text-white transition-all shadow-lg shadow-purple-500/20"
-            >
-              {t.nav.workWithMe}
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-6xl mx-auto px-6">
-        {/* HERO SECTION */}
-        <section className="py-20 md:py-28 border-b border-zinc-800/60">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-medium mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            {t.hero.badge}
-          </div>
-
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.1] max-w-4xl">
-            {t.hero.titlePrefix}{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-400">
-              {t.hero.titleHighlight}
-            </span>{' '}
-            {t.hero.titleSuffix}
-          </h1>
-
-          <p className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl leading-relaxed">
-            {t.hero.description}
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a
-              href="https://www.upwork.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold transition-all shadow-lg shadow-purple-600/25"
-            >
-              {t.hero.hireUpwork}
-              <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 font-semibold transition-all"
-            >
-              {t.hero.exploreProjects}
-            </a>
-          </div>
-
-          <div className="mt-14 pt-8 border-t border-zinc-800/60 grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="flex items-start gap-3">
-              <Award className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-white">{t.hero.hackernoonStat}</p>
-                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.hackernoonDesc}</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <Cpu className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-white">{t.hero.masterStat}</p>
-                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.masterDesc}</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <MapPin className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-white">{t.hero.locationStat}</p>
-                <p className="text-xs text-zinc-400 mt-0.5">{t.hero.locationDesc}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CASE STUDIES */}
-        <section id="projects" className="py-20 border-b border-zinc-800/60">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">{t.projects.title}</h2>
-              <p className="text-zinc-400 mt-2">{t.projects.subtitle}</p>
-            </div>
-            <a
-              href="https://github.com/metinyurdev"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300"
-            >
-              {t.projects.viewAllGithub} <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projectKeys.map((key) => {
-              const project = projectsData[key];
-              if (!project) return null;
-              return (
-                <div
-                  key={key}
-                  onClick={() => setSelectedProject(project)}
-                  className="group rounded-2xl bg-zinc-900/50 border border-zinc-800 hover:border-purple-500/50 p-7 flex flex-col justify-between transition-all cursor-pointer"
-                >
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-xs font-mono uppercase tracking-wider text-purple-400 bg-purple-500/10 px-2.5 py-1 rounded-md">
-                        {project.category}
-                      </span>
-                      <span className="text-purple-400 group-hover:text-purple-300 inline-flex items-center gap-1 text-xs font-medium">
-                        {project.demoLabel} <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
-                      {project.title}
-                    </h3>
-
-                    <div className="mt-4 space-y-2.5 text-sm">
-                      <p className="text-zinc-400">
-                        <strong className="text-zinc-200">{t.projects.challenge}</strong> {project.problem}
-                      </p>
-                      <p className="text-zinc-400">
-                        <strong className="text-zinc-200">{t.projects.architecture}</strong> {project.solution}
-                      </p>
-                    </div>
-
-                    <div className="mt-5 space-y-1.5">
-                      {project.metrics?.map((metric, mIdx) => (
-                        <div key={mIdx} className="flex items-center gap-2 text-xs text-emerald-400 font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
-                          <span>{metric}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="mt-6 pt-5 border-t border-zinc-800/80 flex flex-wrap gap-2">
-                    {project.stack?.map((tech, tIdx) => (
-                      <span
-                        key={tIdx}
-                        className="text-xs font-mono px-2.5 py-1 rounded bg-zinc-950 border border-zinc-800 text-zinc-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* SERVICES */}
-        <section id="services" className="py-20 border-b border-zinc-800/60">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-white">{t.services.title}</h2>
-            <p className="text-zinc-400 mt-2">{t.services.subtitle}</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {t.services.list.map((service, idx) => (
-              <div key={idx} className="rounded-2xl bg-zinc-900/40 border border-zinc-800 p-7">
-                <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-5">
-                  {serviceIcons[idx]}
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2.5">{service.title}</h3>
-                <p className="text-sm text-zinc-400 leading-relaxed mb-5">{service.description}</p>
-                <ul className="space-y-2 border-t border-zinc-800/80 pt-4">
-                  {service.deliverables.map((item, dIdx) => (
-                    <li key={dIdx} className="text-xs text-zinc-300 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* PUBLICATIONS */}
-        <section id="writing" className="py-20 border-b border-zinc-800/60">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">{t.writing.title}</h2>
-              <p className="text-zinc-400 mt-2">{t.writing.subtitle}</p>
-            </div>
-            <a
-              href="https://hackernoon.com/u/metinyurdev"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-sm font-medium text-purple-400 hover:text-purple-300"
-            >
-              {t.writing.readMore} <ExternalLink className="w-4 h-4" />
-            </a>
-          </div>
-
-          <div className="rounded-2xl bg-gradient-to-br from-purple-950/30 via-zinc-900/60 to-zinc-900/60 border border-purple-500/30 p-7 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-2 max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold text-purple-300 bg-purple-500/15 px-3 py-1 rounded-full">
-                <BookOpen className="w-3.5 h-3.5" />
-                {t.writing.featuredBadge}
-              </div>
-              <h3 className="text-2xl font-bold text-white">
-                {t.writing.articleTitle}
-              </h3>
-              <p className="text-sm text-zinc-300 leading-relaxed">
-                {t.writing.articleDesc}
-              </p>
-            </div>
-            <a
-              href="https://hackernoon.com/u/metinyurdev"
-              target="_blank"
-              rel="noreferrer"
-              className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-white text-zinc-950 hover:bg-zinc-200 font-semibold text-sm transition-colors"
-            >
-              {t.writing.readArticle} <ArrowUpRight className="w-4 h-4" />
-            </a>
-          </div>
-        </section>
-
-        {/* TECH STACK */}
-        <section id="stack" className="py-20 border-b border-zinc-800/60">
-          <h2 className="text-3xl font-bold tracking-tight text-white mb-10">{t.stack.title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {skillGroups.map((group, idx) => (
-              <div key={idx} className="rounded-2xl bg-zinc-900/40 border border-zinc-800 p-6">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-purple-400 mb-4 flex items-center gap-2">
-                  <Code2 className="w-4 h-4" />
-                  {group.title}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.skills.map((skill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="text-xs px-2.5 py-1.5 rounded-md bg-zinc-950 border border-zinc-800 text-zinc-300"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CONTACT SECTION */}
-        <section id="contact" className="py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-white">{t.contact.title}</h2>
-              <p className="text-zinc-400 mt-3 leading-relaxed">
-                {t.contact.subtitle}
-              </p>
-
-              <div className="mt-8 space-y-4">
-                <a
-                  href="mailto:contact@metinyur.dev"
-                  className="flex items-center gap-3 text-zinc-300 hover:text-purple-400 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-purple-400" />
-                  </div>
-                  <span className="text-sm font-medium">contact@metinyur.dev</span>
-                </a>
-
-                <div className="flex items-center gap-3 pt-4">
-                  {/* GITHUB IKONU */}
-                  <a
-                    href="https://github.com/metinyurdev"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 text-zinc-300 hover:text-white transition-all"
-                    aria-label="GitHub"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 8 18v4"></path><path d="M12 22v-4"></path></svg>
-                  </a>
-                  {/* LINKEDIN IKONU */}
-                  <a
-                    href="https://www.linkedin.com/in/metin-yurduseven"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 text-zinc-300 hover:text-white transition-all"
-                    aria-label="LinkedIn"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                  </a>
-                  {/* HACKERNOON IKONU */}
-                  <a
-                    href="https://hackernoon.com/u/metinyurdev"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-3 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 text-zinc-300 hover:text-white transition-all"
-                    aria-label="HackerNoon"
-                  >
-                    <BookOpen className="w-5 h-5" />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="rounded-2xl bg-zinc-900/50 border border-zinc-800 p-7 space-y-4">
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.yourName}</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Jane Doe"
-                  className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-sm text-white focus:outline-none focus:border-purple-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.workEmail}</label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="jane@company.com"
-                  className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-sm text-white focus:outline-none focus:border-purple-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.projectScope}</label>
-                <select
-                  value={formData.projectType}
-                  onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-sm text-white focus:outline-none focus:border-purple-500"
-                >
-                  <option>AI Agent / RAG System</option>
-                  <option>Private LLM Deployment & Fine-Tuning</option>
-                  <option>Full-Stack Web App / Backend API</option>
-                  <option>Technical Consulting / Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-zinc-400 mb-1.5">{t.contact.projectDetails}</label>
-                <textarea
-                  rows={4}
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Briefly describe your goals, timeline, and tech stack..."
-                  className="w-full px-4 py-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-sm text-white focus:outline-none focus:border-purple-500"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={formStatus === 'submitting'}
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm transition-all cursor-pointer"
-              >
-                {formStatus === 'submitting' ? t.contact.sending : t.contact.sendInquiry}
-                <Send className="w-4 h-4" />
-              </button>
-
-              {formStatus === 'success' && (
-                <p className="text-xs text-emerald-400 text-center pt-1">
-                  {t.contact.successMsg}
-                </p>
-              )}
-            </form>
-          </div>
-        </section>
+        {/* SAYFA RENDERER */}
+        {currentView === 'home' && <Home lang={lang} onNavigate={setCurrentView} />}
+        {currentView === 'projects' && <Projects lang={lang} onSelectProject={setSelectedProject} />}
+        {currentView === 'services' && <Services lang={lang} />}
+        {currentView === 'writing' && <Writing lang={lang} />}
+        {currentView === 'stack' && <Stack lang={lang} />}
+        {currentView === 'contact' && (
+          <Contact
+            lang={lang}
+            formData={formData}
+            setFormData={setFormData}
+            formStatus={formStatus}
+            onSubmit={handleSubmit}
+          />
+        )}
       </main>
 
       {/* PROJE DETAY MODALI */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
-      <footer className="border-t border-zinc-800/80 py-8 text-center text-xs text-zinc-500">
-        <p>© {new Date().getFullYear()} Metin Yurduseven. {t.footer.rights}</p>
-      </footer>
+      {/* Kurumsal Footer Bileşeni */}
+      <Footer lang={lang} onNavigate={setCurrentView} />
     </div>
   );
 }
