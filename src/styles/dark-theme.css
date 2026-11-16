@@ -260,7 +260,7 @@ html.dark {
   html.dark,
   html.dark body {
     overflow-x: hidden !important;
-    overscroll-behavior-y: none !important; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu engeller */
+    overscroll-behavior-y: none !important;
     background-color: #0f1115 !important;
   }
 }
@@ -281,4 +281,35 @@ html.dark ::-webkit-scrollbar-thumb {
 
 html.dark ::-webkit-scrollbar-thumb:hover {
   background: #38bdf8 !important;
+}
+
+/* ==========================================
+   MOBİL MENÜ (HAMBURGER DRAWER) GECE MODU ÇÖZÜMÜ
+   ========================================== */
+html.dark header div[class*="md:hidden"],
+html.dark header nav + div,
+html.dark div[class*="fixed"][class*="inset-0"] nav,
+html.dark div[class*="absolute"][class*="top-full"],
+html.dark div[class*="bg-white"],
+html.dark div[class*="bg-zinc-50"],
+html.dark div[class*="bg-zinc-100"] {
+  background-color: #0f1115 !important;
+  color: #f8fafc !important;
+}
+
+html.dark header div[class*="md:hidden"] div,
+html.dark header div[class*="md:hidden"] nav {
+  background-color: #0f1115 !important;
+  border-color: #27272a !important;
+}
+
+html.dark header div[class*="md:hidden"] a,
+html.dark header div[class*="md:hidden"] button {
+  color: #f4f4f5 !important;
+}
+
+html.dark header div[class*="md:hidden"] a:hover,
+html.dark header div[class*="md:hidden"] button:hover {
+  color: #38bdf8 !important;
+  background-color: #18181b !important;
 }
