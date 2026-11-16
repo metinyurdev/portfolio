@@ -238,3 +238,29 @@ html.dark .fixed.inset-0.z-50 .max-w-5xl h4[class*="text-sky"] {
 html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
   color: #34d399 !important;
 }
+
+/* ==========================================
+   ÖZEL KOYU SCROLLBAR (Gece Modu İçin)
+   ========================================== */
+html.dark {
+  scrollbar-width: thin;
+  scrollbar-color: #27272a #090a0c;
+}
+
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: #090a0c !important; /* Pure black arka plan */
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #27272a !important; /* Koyu gri parça */
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8 !important; /* Hover'da elektrik mavisi */
+}
