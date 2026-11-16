@@ -64,14 +64,42 @@ html.dark div[class*="dark:bg-dark"] * {
 }
 
 /* "Explore Case Studies" Butonu ve Diğer İkincil Butonlar Gece Modunda Belirgin Olsun */
-html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]) {
+html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]):not([class*="bg-sky"]) {
   border-color: #52525b !important;
   color: #f4f4f5 !important;
 }
 
-html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]):hover {
+html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]):not([class*="bg-sky"]):hover {
   background-color: #27272a !important;
   border-color: #38bdf8 !important;
+}
+
+/* ==========================================
+   "WORK WITH ME" / ANA EYLEM BUTONLARI MAVİ
+   ========================================== */
+html.dark a[href*="#contact"],
+html.dark button[class*="bg-zinc"],
+html.dark button[class*="bg-black"],
+html.dark a[class*="bg-zinc"],
+html.dark a[class*="bg-black"] {
+  /* Eğer siyah/zinc renkli ana butonlarsa maviye çeviriyoruz */
+}
+
+/* "Work with me" veya benzeri ana CTA butonları gece modunda canlı mavi olsun */
+html.dark header a[href*="contact"],
+html.dark main a[href*="contact"],
+html.dark a.bg-zinc-900,
+html.dark button.bg-zinc-900 {
+  background-color: #38bdf8 !important;
+  color: #0f1115 !important;
+  font-weight: 600 !important;
+  border: none !important;
+}
+
+html.dark a.bg-zinc-900:hover,
+html.dark button.bg-zinc-900:hover {
+  background-color: #0ea5e9 !important;
+  color: #ffffff !important;
 }
 
 /* 4. Tüm Vurgu Renkleri (Mor Yerine Canlı Mavi / Electric Blue) */
@@ -246,41 +274,6 @@ html.dark .fixed.inset-0.z-50 .max-w-5xl h4[class*="text-sky"] {
 /* Metrik kutuları içindeki yazılar net */
 html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
   color: #34d399 !important;
-}
-
-/* ==========================================
-   MOBİL & GECE MODU KESİN SCROLLBAR & OVERSCROLL ÇÖZÜMÜ
-   ========================================== */
-html.dark {
-  scrollbar-width: thin !important;
-  scrollbar-color: #3f3f46 #0f1115 !important;
-}
-
-@media screen and (max-width: 768px) {
-  html.dark,
-  html.dark body {
-    overflow-x: hidden !important;
-    overscroll-behavior-y: none !important;
-    background-color: #0f1115 !important;
-  }
-}
-
-html.dark ::-webkit-scrollbar {
-  width: 6px !important;
-  height: 6px !important;
-}
-
-html.dark ::-webkit-scrollbar-track {
-  background: #0f1115 !important;
-}
-
-html.dark ::-webkit-scrollbar-thumb {
-  background: #3f3f46 !important;
-  border-radius: 3px !important;
-}
-
-html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8 !important;
 }
 
 /* ==========================================
