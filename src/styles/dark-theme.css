@@ -1,19 +1,20 @@
 /* ==========================================
-   GECE TEMASI KÖK AYARI (Mobil Tarayıcı Uyumu)
+   GECE TEMASI & KÖK MOBİL UYUM AYARLARI
    ========================================== */
 html.dark {
-  color-scheme: dark !important;
   background-color: #0f1115 !important;
+  color-scheme: dark !important;
 }
-
-/* ==========================================
-   GECE TEMASI (dark-theme.css) - Canlı Mavi & Net Mimari
-   ========================================== */
 
 html.dark body {
   background-color: #0f1115 !important;
   color: #f8fafc !important;
+  min-height: 100vh;
 }
+
+/* ==========================================
+   GECE TEMASI - Canlı Mavi & Net Mimari
+   ========================================== */
 
 /* 1. Sol Üst Logo (Sadece metin.dev mor kalsın) */
 html.dark header {
@@ -248,19 +249,19 @@ html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
 }
 
 /* ==========================================
-   MOBİL & GECE MODU KESİN SCROLLBAR ÇÖZÜMÜ
+   MOBİL & GECE MODU KESİN SCROLLBAR & OVERSCROLL ÇÖZÜMÜ
    ========================================== */
-html.dark body {
-  background-color: #0f1115 !important;
-  color-scheme: dark !important;
+html.dark {
   scrollbar-width: thin !important;
   scrollbar-color: #3f3f46 #0f1115 !important;
 }
 
 @media screen and (max-width: 768px) {
+  html.dark,
   html.dark body {
-    overflow-x: hidden;
-    overscroll-behavior-y: none; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu kilitler */
+    overflow-x: hidden !important;
+    overscroll-behavior-y: none !important; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu engeller */
+    background-color: #0f1115 !important;
   }
 }
 
