@@ -240,45 +240,41 @@ html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
 }
 
 /* ==========================================
-   GECE TEMASI NATIVE SCROLLBAR & COLOR SCHEME
+   MOBİL & GECE MODU KESİN SCROLLBAR & OVERSCROLL ÇÖZÜMÜ
    ========================================== */
-html.dark {
-  color-scheme: dark; /* Mobil tarayıcılara koyu modda olduğunu bildirir */
-}
-
-/* Tüm tarayıcılar ve mobil webview'lar için koyu scrollbar */
 html.dark, 
 html.dark body {
-  scrollbar-width: thin;
-  scrollbar-color: #3f3f46 #090a0c;
+  background-color: #0f1115 !important;
+  color-scheme: dark !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: #3f3f46 #0f1115 !important;
+}
+
+@media screen and (max-width: 768px) {
+  html.dark {
+    background-color: #0f1115 !important;
+  }
+  html.dark body {
+    background-color: #0f1115 !important;
+    overflow-x: hidden;
+    overscroll-behavior-y: none; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu engeller */
+  }
 }
 
 html.dark ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px !important;
+  height: 6px !important;
 }
 
 html.dark ::-webkit-scrollbar-track {
-  background: #090a0c !important; /* Gece modu saf siyah arka planı */
+  background: #0f1115 !important;
 }
 
 html.dark ::-webkit-scrollbar-thumb {
-  background: #27272a !important; /* Koyu gri parça */
-  border-radius: 4px;
+  background: #3f3f46 !important;
+  border-radius: 3px !important;
 }
 
 html.dark ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8 !important; /* Hover anında elektrik mavisi */
-}
-
-/* ==========================================
-   MOBİL OVERSCROLL & TARAYICI ÜST ÇUBUK UYUMU
-   ========================================== */
-@media screen and (max-width: 768px) {
-  html.dark,
-  html.dark body {
-    background-color: #0f1115 !important;
-    color-scheme: dark !important;
-    overscroll-behavior-y: none; /* Mobilde yukarı çekince oluşan beyaz boşluğu engeller */
-  }
+  background: #38bdf8 !important;
 }
