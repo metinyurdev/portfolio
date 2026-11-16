@@ -1,0 +1,240 @@
+/* ==========================================
+   GECE TEMASI (dark-theme.css) - Canlı Mavi & Net Mimari
+   ========================================== */
+
+html.dark body {
+  background-color: #0f1115 !important;
+  color: #f8fafc !important;
+}
+
+/* 1. Sol Üst Logo (Sadece metin.dev mor kalsın) */
+html.dark header {
+  background-color: rgba(15, 17, 21, 0.90) !important;
+  border-color: #27272a !important;
+}
+
+html.dark header button {
+  background-color: transparent !important;
+}
+
+html.dark header nav button {
+  color: #d4d4d8 !important;
+}
+
+html.dark header nav button:hover,
+html.dark header nav button.font-semibold {
+  color: #38bdf8 !important; /* Canlı Mavi Vurgu */
+}
+
+/* Sağ üstteki Mod ve Dil Butonları */
+html.dark header div.flex.items-center.gap-3 > button:not(:last-child) {
+  background-color: #18181b !important;
+  border-color: #3f3f46 !important;
+  color: #ffffff !important;
+}
+
+/* 2. Hero Alanı ve Açıklama Paragrafları (Net ve Okunabilir) */
+html.dark main p,
+html.dark main span {
+  color: #e4e4e7 !important;
+}
+
+/* 3. Kartlar, Bölüm Kutuları ve "Explore Case Studies" Butonu */
+html.dark .bg-white,
+html.dark div[class*="bg-white"],
+html.dark div[class*="dark:bg-zinc-900"] {
+  background-color: #18181b !important;
+  border-color: #3f3f46 !important; /* Kenarlıklar daha belirgin */
+}
+
+/* Kartların içindeki tüm başlık ve yazılar pırıl pırıl beyaz */
+html.dark .bg-white h1, html.dark .bg-white h2, html.dark .bg-white h3, html.dark .bg-white h4, html.dark .bg-white p,
+html.dark div[class*="bg-white"] h1, html.dark div[class*="bg-white"] h2, html.dark div[class*="bg-white"] h3, html.dark div[class*="bg-white"] h4, html.dark div[class*="bg-white"] p,
+html.dark div[class*="dark:bg-dark"] * {
+  color: #f4f4f5 !important;
+}
+
+/* "Explore Case Studies" Butonu ve Diğer İkincil Butonlar Gece Modunda Belirgin Olsun */
+html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]) {
+  border-color: #52525b !important;
+  color: #f4f4f5 !important;
+}
+
+html.dark button:not([class*="bg-blue"]):not([class*="bg-indigo"]):hover {
+  background-color: #27272a !important;
+  border-color: #38bdf8 !important;
+}
+
+/* 4. Tüm Vurgu Renkleri (Mor Yerine Canlı Mavi / Electric Blue) */
+html.dark .text-blue-700,
+html.dark .text-blue-600,
+html.dark .text-indigo-400,
+html.dark svg,
+html.dark span[class*="text-indigo"],
+html.dark span[class*="text-blue"] {
+  color: #38bdf8 !important; /* Canlı Mavi Tonu */
+}
+
+/* Sayfanın ana başlıkları pırıl pırıl beyaz */
+html.dark main h1,
+html.dark main h2,
+html.dark main h3 {
+  color: #ffffff !important;
+}
+
+/* 5. Footer Gece Modu (Tam Siyah ve Canlı Mavi Hover Efektleri) */
+html.dark footer {
+  background-color: #090a0c !important;
+  border-color: #27272a !important;
+}
+
+html.dark footer h4,
+html.dark footer p,
+html.dark footer a,
+html.dark footer button,
+html.dark footer li {
+  color: #f4f4f5 !important;
+}
+
+html.dark footer .text-zinc-600,
+html.dark footer .text-zinc-500 {
+  color: #a1a1aa !important;
+}
+
+html.dark footer a:hover {
+  color: #38bdf8 !important;
+}
+
+/* ==========================================
+   İletişim Formu Gece Modu Özel İstisnası
+   ========================================== */
+html.dark form input,
+html.dark form select,
+html.dark form textarea {
+  background-color: #12141c !important;
+  border-color: #27272a !important;
+  color: #f8fafc !important;
+}
+
+html.dark form input::placeholder,
+html.dark form textarea::placeholder {
+  color: #71717a !important;
+}
+
+html.dark form label {
+  color: #38bdf8 !important; /* Gece mavisi başlıklar */
+}
+
+/* ==========================================
+   Case Studies / Projeler Kartları Gece Modu İstisnası
+   ========================================== */
+html.dark .group {
+  background-color: #090a0c !important;
+  border-color: #a855f7 !important; /* Mor Çerçeve */
+}
+
+html.dark .group:hover {
+  border-color: #38bdf8 !important; /* Hover'da Mavi Çerçeve */
+}
+
+/* Kart içindeki kategori etiketleri koyu lacivert/mavi arka plan */
+html.dark .group span[class*="bg-blue"] {
+  background-color: rgba(30, 58, 138, 0.4) !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  color: #38bdf8 !important;
+}
+
+/* Kart içindeki başlıklar */
+html.dark .group h3 {
+  color: #ffffff !important;
+}
+
+/* Kart içindeki normal paragraflar */
+html.dark .group p {
+  color: #d4d4d8 !important;
+}
+
+/* Challenge ve Architecture gibi koyu kalan bold etiketler pırıl pırıl beyaz olsun */
+html.dark .group p strong {
+  color: #ffffff !important;
+}
+
+/* Tech stack (teknoloji) çipleri: Koyu siyah arkaplan ve pırıl pırıl beyaz yazı */
+html.dark .group div[class*="border-t"] span {
+  background-color: #12141c !important;
+  border-color: #27272a !important;
+  color: #ffffff !important;
+}
+
+html.dark .group div[class*="border-t"] span:hover {
+  border-color: #38bdf8 !important;
+  color: #38bdf8 !important;
+}
+
+/* ==========================================
+   ProjectModal (Proje Detay Modalı) Gece Modu Kesin Çözüm
+   ========================================== */
+html.dark .fixed.inset-0.z-50 {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+/* Modal ana kutusu koyu siyah */
+html.dark .fixed.inset-0.z-50 .max-w-5xl {
+  background-color: #090a0c !important;
+  border-color: #27272a !important;
+  color: #f8fafc !important;
+}
+
+/* Kapat butonu koyu renk */
+html.dark .fixed.inset-0.z-50 .max-w-5xl button[onClick*="onClose"],
+html.dark .fixed.inset-0.z-50 .max-w-5xl button:has(svg.w-5.h-5) {
+  background-color: #12141c !important;
+  border: 1px solid #27272a !important;
+  color: #a1a1aa !important;
+}
+
+html.dark .fixed.inset-0.z-50 .max-w-5xl button[onClick*="onClose"]:hover,
+html.dark .fixed.inset-0.z-50 .max-w-5xl button:has(svg.w-5.h-5):hover {
+  background-color: #18181b !important;
+  color: #ffffff !important;
+}
+
+/* Proje başlığındaki kategori kutucukları (Multi-Agent AI & RAG Architecture vb.) daha koyu */
+html.dark .fixed.inset-0.z-50 .max-w-5xl span[class*="font-mono"][class*="uppercase"] {
+  background-color: #0d1117 !important;
+  border-color: #30363d !important;
+  color: #38bdf8 !important;
+}
+
+/* Modal içindeki Challenge, Architecture ve Core Engineering kutuları koyu olsun */
+html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="bg-"],
+html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="bg-zinc-"],
+html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="bg-black"] {
+  background-color: #12141c !important;
+  border-color: #27272a !important;
+}
+
+/* Modal içi başlıklar pırıl pırıl beyaz */
+html.dark .fixed.inset-0.z-50 .max-w-5xl h2,
+html.dark .fixed.inset-0.z-50 .max-w-5xl h3,
+html.dark .fixed.inset-0.z-50 .max-w-5xl h4,
+html.dark .fixed.inset-0.z-50 .max-w-5xl h5 {
+  color: #ffffff !important;
+}
+
+/* Modal içi paragraflar ve açıklamalar okunabilir net gri/beyaz */
+html.dark .fixed.inset-0.z-50 .max-w-5xl p,
+html.dark .fixed.inset-0.z-50 .max-w-5xl span:not([class*="bg-"]):not([class*="font-mono"]) {
+  color: #d4d4d8 !important;
+}
+
+/* Challenge ve Architecture başlıkları gece mavisi */
+html.dark .fixed.inset-0.z-50 .max-w-5xl h4[class*="text-blue"],
+html.dark .fixed.inset-0.z-50 .max-w-5xl h4[class*="text-sky"] {
+  color: #38bdf8 !important;
+}
+
+/* Metrik kutuları içindeki yazılar net */
+html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
+  color: #34d399 !important;
+}

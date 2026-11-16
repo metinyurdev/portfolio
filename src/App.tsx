@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft } from 'lucide-react';
 import type { ProjectDetail } from './data/projectsData'; 
 import ProjectModal from './components/ProjectModal';
@@ -19,17 +19,26 @@ type ViewState = 'home' | 'projects' | 'services' | 'writing' | 'stack' | 'conta
 export default function App() {
   const [lang, setLang] = useState<Language>('en');
   const [currentView, setCurrentView] = useState<ViewState>('home');
+  const [darkMode, setDarkMode] = useState<boolean>(true); 
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [formData, setFormData] = useState({ name: '', email: '', projectType: 'AI Agent / RAG System', message: '' });
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
 
-  // Sayfa değiştirirken otomatik olarak en üste kaydırma fonksiyonu
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.classList.remove('light');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.classList.add('light');
+    }
+  }, [darkMode]);
+
   const handleViewChange = (view: ViewState) => {
     setCurrentView(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Formspree Entegrasyonu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormStatus('submitting');
@@ -61,28 +70,29 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-zinc-100 font-sans selection:bg-purple-500/30 selection:text-purple-200 flex flex-col justify-between">
-      {/* Üst Navigasyon (Navbar Bileşeni) */}
+    <div className={`min-h-screen font-sans flex flex-col justify-between transition-colors duration-300 ${darkMode ? 'dark bg-[#0f1115] text-slate-100' : 'bg-[#f5f2eb] text-zinc-950'}`}>
       <Navbar 
         lang={lang} 
         setLang={setLang} 
         currentView={currentView} 
         setCurrentView={handleViewChange} 
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
       />
 
       <main className="max-w-6xl mx-auto px-6 w-full py-12 flex-grow">
         {currentView !== 'home' && (
           <button
             onClick={() => handleViewChange('home')}
-            className="inline-flex items-center gap-2 mb-8 text-xs font-mono text-zinc-400 hover:text-white bg-zinc-900/60 border border-zinc-800 px-3.5 py-2 rounded-lg transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 mb-8 text-xs font-mono text-zinc-900 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-white bg-white dark:bg-zinc-900 border border-blue-200 dark:border-zinc-800 px-3.5 py-2 rounded-lg transition-all cursor-pointer shadow-sm font-semibold"
           >
-            <ArrowLeft className="w-4 h-4 text-purple-400" />
+            <ArrowLeft className="w-4 h-4 text-blue-600 dark:text-indigo-400" />
             {lang === 'tr' ? '← Ana Sayfaya Dön' : '← Back to Overview'}
           </button>
         )}
 
         {/* SAYFA RENDERER */}
-        {currentView === 'home' && <Home lang={lang} onNavigate={handleViewChange} />}
+        {currentView === 'home' && <Home lang={lang} onNavigate={handleViewChange} darkMode={darkMode} />}
         {currentView === 'projects' && <Projects lang={lang} onSelectProject={setSelectedProject} />}
         {currentView === 'services' && <Services lang={lang} />}
         {currentView === 'writing' && <Writing lang={lang} />}
@@ -98,10 +108,8 @@ export default function App() {
         )}
       </main>
 
-      {/* PROJE DETAY MODALI */}
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
-      {/* Kurumsal Footer Bileşeni */}
       <Footer lang={lang} onNavigate={handleViewChange} />
     </div>
   );

@@ -55,9 +55,21 @@ export const translations = {
       subtitle: "Deep dives into LLM systems, fine-tuning, and production AI architecture.",
       readMore: "Read more on HackerNoon",
       featuredBadge: "Featured • #1 Top Story on HackerNoon",
-      articleTitle: "The LLM Operating System: Transformers, Limitations, and the Need for Adaptation",
-      articleDesc: "An architectural analysis of treating Large Language Models as kernel processes within modern software systems—covering context bottlenecks, memory hierarchies, tool orchestration, and domain adaptation.",
       readArticle: "Read Article",
+      articles: [
+        {
+          title: "The LLM Operating System: Transformers, Limitations, and the Need for Adaptation",
+          description: "An architectural analysis of treating Large Language Models as kernel processes within modern software systems—covering context bottlenecks, memory hierarchies, tool orchestration, and domain adaptation.",
+          link: "https://hackernoon.com/the-llm-operating-system-transformers-limitations-and-the-need-for-adaptation",
+          badge: "Featured • #1 Top Story on HackerNoon"
+        },
+        {
+          title: "RAG Systems Are Breaking the Barriers of Language Models: Heres How",
+          description: "Exploring how Retrieval-Augmented Generation overcomes static knowledge cutoffs and hallucinations by grounding LLMs in dynamic, enterprise-grade vector spaces.",
+          link: "https://hackernoon.com/rag-systems-are-breaking-the-barriers-of-language-models-heres-how",
+          badge: "HackerNoon Tech Article"
+        }
+      ]
     },
     stack: {
       title: "Production Tech Stack",
@@ -133,9 +145,21 @@ export const translations = {
       subtitle: "LLM sistemleri, ince ayar (fine-tuning) ve üretim yapay zeka mimarisi üzerine derinlemesine analizler.",
       readMore: "HackerNoon'da daha fazlasını oku",
       featuredBadge: "Öne Çıkan • HackerNoon #1 Popüler Makale",
-      articleTitle: "LLM İşletim Sistemi: Transformer'lar, Sınırlamalar ve Adaptasyon İhtiyacı",
-      articleDesc: "Büyük Dil Modellerini modern yazılım sistemleri içinde çekirdek süreçler olarak ele alan mimari bir analiz—bağlam darboğazları, bellek hiyerarşileri, araç optimizasyonu ve domain adaptasyonu.",
       readArticle: "Makaleyi Oku",
+      articles: [
+        {
+          title: "LLM İşletim Sistemi: Transformer'lar, Sınırlamalar ve Adaptasyon İhtiyacı",
+          description: "Büyük Dil Modellerini modern yazılım sistemleri içinde çekirdek süreçler olarak ele alan mimari bir analiz—bağlam darboğazları, bellek hiyerarşileri, araç optimizasyonu ve domain adaptasyonu.",
+          link: "https://hackernoon.com/the-llm-operating-system-transformers-limitations-and-the-need-for-adaptation",
+          badge: "Öne Çıkan • HackerNoon #1 Popüler Makale"
+        },
+        {
+          title: "RAG Sistemleri Dil Modellerinin Engellerini Nasıl Aşıyor?",
+          description: "Retrieval-Augmented Generation (RAG) teknolojisinin, statik bilgi sınırlarını ve halüsinasyonları kurumsal düzeyde dinamik vektör uzaylarıyla nasıl aştığının incelemesi.",
+          link: "https://hackernoon.com/rag-systems-are-breaking-the-barriers-of-language-models-heres-how",
+          badge: "HackerNoon Teknik Makale"
+        }
+      ]
     },
     stack: {
       title: "Üretim Teknolojisi Yığını (Tech Stack)",

@@ -1,0 +1,29 @@
+/* Gündüz Teması - İzole Stil Dosyası */
+html.light body {
+  background-color: #f5f2eb !important;
+  color: #09090b !important;
+}
+
+/* Gündüz modunda tüm kartlar ve kutular tertemiz beyaz olsun */
+html.light .bg-zinc-900,
+html.light .bg-zinc-950,
+html.light .dark\:bg-zinc-900 {
+  background-color: #ffffff !important;
+  color: #09090b !important;
+  border-color: #e4e4e7 !important;
+}
+
+/* Gündüz modunda metin renkleri */
+html.light p, 
+html.light span, 
+html.light h1, 
+html.light h2, 
+html.light h3 {
+  color: #09090b;
+}
+
+/* Vurgulu kısımlar koyu mavi kalsın */
+html.light .text-indigo-400,
+html.light .text-blue-400 {
+  color: #1d4ed8 !important;
+}
