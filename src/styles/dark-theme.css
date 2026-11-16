@@ -1,4 +1,12 @@
 /* ==========================================
+   GECE TEMASI KÖK AYARI (Mobil Tarayıcı Uyumu)
+   ========================================== */
+html.dark {
+  color-scheme: dark !important;
+  background-color: #0f1115 !important;
+}
+
+/* ==========================================
    GECE TEMASI (dark-theme.css) - Canlı Mavi & Net Mimari
    ========================================== */
 
@@ -240,9 +248,8 @@ html.dark .fixed.inset-0.z-50 .max-w-5xl div[class*="text-emerald"] span {
 }
 
 /* ==========================================
-   MOBİL & GECE MODU KESİN SCROLLBAR & OVERSCROLL ÇÖZÜMÜ
+   MOBİL & GECE MODU KESİN SCROLLBAR ÇÖZÜMÜ
    ========================================== */
-html.dark, 
 html.dark body {
   background-color: #0f1115 !important;
   color-scheme: dark !important;
@@ -251,13 +258,9 @@ html.dark body {
 }
 
 @media screen and (max-width: 768px) {
-  html.dark {
-    background-color: #0f1115 !important;
-  }
   html.dark body {
-    background-color: #0f1115 !important;
     overflow-x: hidden;
-    overscroll-behavior-y: none; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu engeller */
+    overscroll-behavior-y: none; /* Mobilde yukarı/aşağı çekince oluşan beyaz boşluğu kilitler */
   }
 }
 
